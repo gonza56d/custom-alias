@@ -26,6 +26,7 @@ alias resetdb='rm db.sqlite3; python3.10 manage.py migrate; django'
 alias loc='cd /Users/gonza56d/Work/Projects/capital-line-of-credit'
 alias bff='cd /Users/gonza56d/Work/Projects/capital-bff'
 alias integration='cd /Users/gonza56d/Work/Projects/capital-integration-test'
+alias projects='cd /Users/gonza56d/Work/Projects'
 alias home='cd ~'
 ptest() {
     docker compose run --entrypoint="" $1 pytest $2 $3

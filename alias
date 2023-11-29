@@ -1,6 +1,5 @@
 alias lfilter='ls |grep'
 alias resetenv='deactivate; rm -rf venv && python3.10 -m venv venv && source venv/bin/activate && pip install --upgrade pip'
-alias devtools='cd ~/projects/nubi/nb-dev-tools'
 alias activate='source venv/bin/activate'
 alias pi='pip install'
 alias pir='pip install -r'
@@ -24,6 +23,10 @@ alias python='python3.10'
 alias p='python3.10'
 alias django='python3 manage.py runserver'
 alias resetdb='rm db.sqlite3; python3.10 manage.py migrate; django'
+alias loc='cd /Users/gonza56d/Work/Projects/capital-line-of-credit'
+alias bff='cd /Users/gonza56d/Work/Projects/capital-bff'
+alias integration='cd /Users/gonza56d/Work/Projects/capital-integration-test'
+alias home='cd ~'
 ptest() {
     docker compose run --entrypoint="" $1 pytest $2 $3
 }

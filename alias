@@ -15,9 +15,9 @@ alias gc='git commit -m'
 alias gcob='git checokut -b'
 alias ga='git add'
 alias gps='git push origin HEAD'
-alias gpl='git pull'
+alias gpl='git pull' 
 alias gm='git checkout master'
-alias gmu='git checkout master && git pull'
+alias gmu='git checkout master && git pull' 
 alias pycharm='nohup ~/PyCharm/bin/pycharm.sh & exit'
 alias python='python3.10'
 alias p='python3.10'
@@ -27,7 +27,10 @@ alias loc='cd /Users/gonza56d/Work/Projects/capital-line-of-credit'
 alias bff='cd /Users/gonza56d/Work/Projects/capital-bff'
 alias integration='cd /Users/gonza56d/Work/Projects/capital-integration-test'
 alias projects='cd /Users/gonza56d/Work/Projects'
-alias home='cd ~'
+alias home='cd ~' 
+alias dkill='docker rm -f $(docker ps -q)'
+alias gclean='git fetch —prune && git branch -vv | grep ': gone' | awk '{print $1}' | xargs git branch -D'
+
 ptest() {
     docker compose run --entrypoint="" $1 pytest $2 $3
 }

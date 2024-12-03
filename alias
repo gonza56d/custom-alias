@@ -133,6 +133,7 @@ alias gclean='git branch | grep -v "^\*" | grep -v " master$" | grep -v " main$"
 alias dclean='docker rm -f $(docker ps -aq) ; docker system prune -af ; docker volume rm $(docker volume ls -q)'
 alias v='nvim'
 alias vcfg='nvim ~/.config/nvim/init.lua'
+# move to master or main
 function master() {
     if git show-ref --verify --quiet refs/heads/master; then
         git checkout master
@@ -143,10 +144,12 @@ function master() {
     fi
 }
 alias master='master'
+# put comments in your git branches
 function gcomment() {
     git config branch.$1.description $2
 }
 alias gcomment='gcomment'
+# print your branches with their comments (if any)
 function gb() {
     git branch | while read branch; do
         branch_name=$(echo $branch | sed 's/^*//g' | xargs)
@@ -159,10 +162,7 @@ function gb() {
     done
 }
 alias gb='gb'
-function CAP() {
-    git checkout CAP-$1
-}
-alias CAP='CAP'
+# checkout your branch with its comment
 function gco() {
     branch_name=$1
     git checkout "$branch_name"

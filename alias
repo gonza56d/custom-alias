@@ -111,7 +111,6 @@ alias setuppy='pip install -e .'
 alias dcr='docker compose run'
 alias dcb='docker compose build'
 alias dcu='docker compose up'
-alias gco='git checkout'
 alias gc='git commit -m'
 alias gcob='git checokut -b'
 alias ga='git add'
@@ -130,7 +129,50 @@ alias integration='cd /Users/gonza56d/Work/repos/capital-integration-test'
 alias repos='cd /Users/gonza56d/Work/repos'
 alias home='cd ~' 
 alias dkill='docker rm -f $(docker ps -q)'
-alias gclean='git fetch —prune && git branch -vv | grep ': gone' | awk '{print $1}' | xargs git branch -D'
+alias gclean='git branch | grep -v "^\*" | grep -v " master$" | grep -v " main$" | xargs git branch -d'
+alias dclean='docker rm -f $(docker ps -aq) ; docker system prune -af ; docker volume rm $(docker volume ls -q)'
+alias v='nvim'
+alias vcfg='nvim ~/.config/nvim/init.lua'
+function master() {
+    if git show-ref --verify --quiet refs/heads/master; then
+        git checkout master
+    elif git show-ref --verify --quiet refs/heads/main; then
+        git checkout main
+    else
+        echo "Neither master nor main branch found."
+    fi
+}
+alias master='master'
+function gcomment() {
+    git config branch.$1.description $2
+}
+alias gcomment='gcomment'
+function gb() {
+    git branch | while read branch; do
+        branch_name=$(echo $branch | sed 's/^*//g' | xargs)
+        desc=$(git config branch."$branch_name".description 2>/dev/null)
+        if [ -n "$desc" ]; then
+            echo "$branch  # $desc"
+        else
+            echo "$branch"
+        fi
+    done
+}
+alias gb='gb'
+function CAP() {
+    git checkout CAP-$1
+}
+alias CAP='CAP'
+function gco() {
+    branch_name=$1
+    git checkout "$branch_name"
+    desc=$(git config branch."$branch_name".description 2>/dev/null)
+    if [ -n "$desc" ]; then
+        echo "Description: $desc"
+    fi
+}
+alias gco='gco'
+alias tmux='tmux -f ~/.tmux.conf'
 
 ptest() {
     docker compose run --entrypoint="" $1 pytest $2 $3
